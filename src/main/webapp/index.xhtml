@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f5="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Log-in</title>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+            <p:growl id="globalgrowl" showDetail="false" showSummary="true"  life="6000"/>
+            <h:commandLink title="#{msgs.english}" action="#{localeBean.setEnglish()}"
+                           immediate="true">
+                <h:graphicImage name="images/usa.png"/>
+            </h:commandLink> &nbsp;
+            <h:commandLink title="#{msgs.spanish}" action="#{localeBean.setSpanish()}"
+                           immediate="true">
+                <h:graphicImage name="images/esp.png"/>
+            </h:commandLink> &nbsp;
+            <h:commandLink title="#{msgs.greek}" action="#{localeBean.setGreek()}"
+                           immediate="true">
+                <h:graphicImage name="images/gre.png"/>
+            </h:commandLink> &nbsp;
+            <h:commandLink title="#{msgs.russian}" action="#{localeBean.setRussian()}"
+                           immediate="true">
+                <h:graphicImage name="images/rus.png"/>
+            </h:commandLink>
+            <br/>
+            <h1>#{msgs.welcome}</h1>
+            
+            <p:inputMask title="#{msgs.user}"
+                         value="#{passwordBean.username}"
+                         f5:placeholder="#{msgs.userp}"
+                         required="true"
+                         >
+                <p:keyFilter regEx="/[A-Za-z0-9]/" />
+                
+            </p:inputMask> <br/>
+            <p:password title="#{msgs.pass}"
+                         value="#{passwordBean.pass}"
+                         f5:placeholder="#{msgs.passp}"
+                         required="true"
+                         >
+            </p:password> <br/> <br/>
+            <h:commandButton value="#{msgs.login}" action="#{passwordBean.logIn()}"/>
+        </h:form>
+    </h:body>
+</html>

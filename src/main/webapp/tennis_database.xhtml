@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="globalgrowl" showDetail="false" showSummary="true"  life="2000"/>
+
+            <h:commandLink title="#{msgs.english}" action="#{localeBean.setEnglish()}">
+                <h:graphicImage name="images/usa.png"/>
+            </h:commandLink> &nbsp;
+            <h:commandLink title="#{msgs.spanish}" action="#{localeBean.setSpanish()}">
+                <h:graphicImage name="images/esp.png"/>
+            </h:commandLink> &nbsp;
+            <h:commandLink title="#{msgs.greek}" action="#{localeBean.setGreek()}">
+                <h:graphicImage name="images/gre.png"/>
+            </h:commandLink> &nbsp;
+            <h:commandLink title="#{msgs.russian}" action="#{localeBean.setRussian()}">
+                <h:graphicImage name="images/rus.png"/>
+            </h:commandLink>
+            <br/><br/>
+
+            <p:dataTable  id="id_player_table"
+                          var="player"
+                          value="#{playerBean.getPlayers()}"
+                          scrollable="true"
+                          paginatorAlwaysVisible="true"
+                          paginator="true"
+                          paginatorPosition="top"
+                          rows="7">
+                <f:facet name="header"> <h:outputText value="#{msgs.players}" style="font-size: 1.2em"/></f:facet>                
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.update}" /></f:facet>                
+                    <h:selectBooleanCheckbox  onclick="submit()"
+                                              value="#{player.modify}">
+                    </h:selectBooleanCheckbox >
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.playerno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.keyModify}" value="#{player.playerno}"
+                                 title="#{msgs.playerno}">
+                        <f:validateLength minimum="1" maximum="3"/>
+                    </p:inputText>
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.name}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}"  value="#{player.name}"
+                                 title="#{msgs.name}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.init}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}" value="#{player.init}"
+                                 title="#{msgs.init}">
+
+
+                    </p:inputText>
+
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.birth_date}" /></f:facet>                
+
+                    <p:calendar disabled="#{!player.modify}"
+                                value="#{player.birthday_date}"
+                                pattern="yyyy-MM-dd"
+                                title="#{msgs.birth_date}">
+                    </p:calendar>
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.sex}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}"  value="#{player.sex}"
+                                 title="#{msgs.sex}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.joined}" /></f:facet>                
+
+                    <p:calendar disabled="#{!player.modify}"
+                                value="#{player.join_date}"
+                                pattern="yyyy"
+                                title="#{msgs.joined}">
+                    </p:calendar>
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.street}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}"  value="#{player.street}"
+                                 title="#{msgs.street}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>  
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.houseno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}"  value="#{player.houseno}"
+                                 title="#{msgs.houseno}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.postcode}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}"  value="#{player.postcode}"
+                                 title="#{msgs.postcode}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.town}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}"  value="#{player.town}"
+                                 title="#{msgs.town}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.phoneno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}"  value="#{player.phoneno}"
+                                 title="#{msgs.phoneno}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.leagueno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!player.modify}"  value="#{player.leagueno}"
+                                 title="#{msgs.leagueno}">
+                        <f:validateLength minimum="1" maximum="11"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <h:commandButton value="#{msgs.insert}" 
+                                     action="#{playerBean.saveToDatabase(player)}"
+                                     rendered="#{player.keyModify}"
+                                     onclick="submit()"/> 
+
+                </p:column>            
+            </p:dataTable>
+            <h:commandButton value="#{msgs.save}" action="#{playerBean.saveFromUpdate()}"/> &nbsp;
+            <h:commandButton value="#{msgs.addrow}" action="#{playerBean.insertPlayer()}" 
+                             immediate="true"/> &nbsp;
+            <p:commandButton  title="#{msgs.deleteplayer}"
+                              value="#{msgs.deleteplayer}" styleClass="ui-button-raised ui-button-danger" 
+                              icon="pi pi-trash"
+                              rendered="#{!player.keyModify}"
+                              onclick="PF('asdv-dlg-deletep').show();">
+
+            </p:commandButton  >
+            <p:dialog header="#{msgs.deleteplayer}" 
+                      widgetVar="asdv-dlg-deletep" modal="true">
+                <h:outputText value="#{msgs.playerp}"/>
+                <br/>
+                <br/>
+                <p:commandButton value="#{msgs.ok}" icon="pi pi-check" 
+                                 update="@form:globalgrowl"
+                                 onclick="PF('dlg').hide(); submit();" 
+                                 action="#{playerBean.deletePlayer()}">
+                </p:commandButton >
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <p:commandButton value="#{msgs.cancel}"  
+                                 styleClass="ui-button-raised ui-button-warning" 
+                                 update="@none"
+                                 partialSubmit = "true"
+                                 onclick="PF('dlg').hide();"/>
+            </p:dialog>
+            <br/><br/>
+            <p:dataTable  id="id_match_table"
+                          var="match"
+                          value="#{matchBean.getMatches()}"
+                          scrollable="true"
+                          paginatorAlwaysVisible="true"
+                          paginator="true"
+                          paginatorPosition="top"
+                          rows="5">
+                <f:facet name="header"> <h:outputText value="#{msgs.matches}" style="font-size: 1.2em"/></f:facet>                
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.update}" /></f:facet>                
+                    <h:selectBooleanCheckbox  onclick="submit()"
+                                              value="#{match.modify}">
+                    </h:selectBooleanCheckbox >
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.matchno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!match.keyModify}" value="#{match.matchno}"
+                                 title="#{msgs.matchno}">
+                        <f:validateLength minimum="1" maximum="3"/>
+                    </p:inputText>
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.teamno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!match.modify}"  value="#{match.teamno}"
+                                 title="#{msgs.teamno}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.playerno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!match.modify}" value="#{match.playerno}"
+                                 title="#{msgs.playerno}">
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.won}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!match.modify}" value="#{match.won}"
+                                 title="#{msgs.won}">
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.lost}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!match.modify}" value="#{match.lost}"
+                                 title="#{msgs.lost}">
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <h:commandButton value="#{msgs.insert}" action="#{matchBean.saveToDatabase(match)}"
+                                     onclick="submit()"
+                                     rendered="#{match.keyModify}"/>
+                </p:column>            
+            </p:dataTable>
+            <h:commandButton value="#{msgs.save}" action="#{matchBean.saveFromUpdate()}"/> &nbsp;
+            <h:commandButton value="#{msgs.addrow}" action="#{matchBean.insertMatch()}" 
+                             /> &nbsp;
+            <p:commandButton  title="#{msgs.deletematch}"
+                                      value="#{msgs.deletematch}" styleClass="ui-button-raised ui-button-danger" 
+                                      icon="pi pi-trash"
+                                      rendered="#{!match.keyModify}"
+                                      onclick="PF('asdv-dlg-deletem').show();">
+                    </p:commandButton  >
+                    <p:dialog header="#{msgs.deletematch}" 
+                      widgetVar="asdv-dlg-deletem" modal="true">
+                        <h:outputText value="#{msgs.matchp}"/>
+                <br/>
+                <br/>
+                <p:commandButton value="#{msgs.ok}" icon="pi pi-check" 
+                                 update="@form:globalgrowl"
+                                 onclick="PF('dlg').hide(); submit();" 
+                                 action="#{matchBean.deleteMatch()}">
+                </p:commandButton >
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <p:commandButton value="#{msgs.cancel}"  
+                                 styleClass="ui-button-raised ui-button-warning" 
+                                 update="@none"
+                                 partialSubmit = "true"
+                                 onclick="PF('dlg').hide();"/>
+            </p:dialog>
+            <br/><br/>
+            <p:dataTable  id="id_team_table"
+                          var="team"
+                          value="#{teamBean.getTeams()}"
+                          scrollable="true"
+                          paginatorAlwaysVisible="true"
+                          paginator="true"
+                          paginatorPosition="top"
+                          rows="3">
+                <f:facet name="header"> <h:outputText value="#{msgs.teams}" style="font-size: 1.2em"/></f:facet>                
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.update}" /></f:facet>                
+                    <h:selectBooleanCheckbox  onclick="submit()"
+                                              value="#{team.modify}">
+                    </h:selectBooleanCheckbox >
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.teamno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!team.keyModify}" value="#{team.teamno}"
+                                 title="#{msgs.teamno}">
+                        <f:validateLength minimum="1" maximum="3"/>
+                    </p:inputText>
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.playerno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!team.keyModify}"  value="#{team.playerno}"
+                                 title="#{msgs.playerno}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.division}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!team.modify}" value="#{team.division}"
+                                 title="#{msgs.division}">
+
+
+                    </p:inputText>
+
+                </p:column>
+                <p:column> 
+                    <h:commandButton value="#{msgs.insert}" action="#{teamBean.saveToDatabase(team)}"
+                                     onclick="submit()"
+                                     rendered="#{team.keyModify}"/>
+                </p:column>            
+            </p:dataTable>
+            <h:commandButton value="#{msgs.save}" action="#{teamBean.saveFromUpdate()}"/> &nbsp;
+            <h:commandButton value="#{msgs.addrow}" action="#{teamBean.insertTeam()}" 
+                             /> &nbsp;
+            <p:commandButton  title="#{msgs.deleteteam}"
+                                      value="#{msgs.deleteteam}" styleClass="ui-button-raised ui-button-danger" 
+                                      icon="pi pi-trash"
+                                      rendered="#{!team.keyModify}"
+                                      onclick="PF('asdv-dlg-deletet').show();">
+                    </p:commandButton  >
+                    <p:dialog header="#{msgs.deleteteam}" 
+                      widgetVar="asdv-dlg-deletet" modal="true">
+                        <h:outputText value="#{msgs.teamp}"/>
+                <br/>
+                <br/>
+                <p:commandButton value="#{msgs.ok}" icon="pi pi-check" 
+                                 update="@form:globalgrowl"
+                                 onclick="PF('dlg').hide(); submit();" 
+                                 action="#{teamBean.deleteTeam()}">
+                </p:commandButton >
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <p:commandButton value="#{msgs.cancel}"  
+                                 styleClass="ui-button-raised ui-button-warning" 
+                                 update="@none"
+                                 partialSubmit = "true"
+                                 onclick="PF('dlg').hide();"/>
+            </p:dialog>
+            <br/><br/>
+            <p:dataTable  id="id_penalty_table"
+                          var="penalty"
+                          value="#{penaltyBean.getPenalties()}"
+                          scrollable="true"
+                          paginatorAlwaysVisible="true"
+                          paginator="true"
+                          paginatorPosition="top"
+                          rows="4">
+                <f:facet name="header"> <h:outputText value="#{msgs.penalties}" style="font-size: 1.2em"/></f:facet>                
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.update}" /></f:facet>                
+                    <h:selectBooleanCheckbox  onclick="submit()"
+                                              value="#{penalty.modify}">
+                    </h:selectBooleanCheckbox >
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.paymentno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!penalty.keyModify}" value="#{penalty.paymentno}"
+                                 title="#{msgs.paymentno}">
+                        <f:validateLength minimum="1" maximum="3"/>
+                    </p:inputText>
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.playerno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!penalty.modify}"  value="#{penalty.playerno}"
+                                 title="#{msgs.playerno}">
+                        <f:validateLength minimum="1" maximum="20"/>
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.paymentdate}" /></f:facet>                
+
+                    <p:calendar disabled ="#{!penalty.modify}" value="#{penalty.pdate}"
+                                title="#{msgs.paymentdate}"
+                                pattern="yyyy-MM-dd">
+                    </p:calendar>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.amount}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!penalty.modify}" value="#{penalty.amount}"
+                                 title="#{msgs.amount}">
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <h:commandButton value="#{msgs.insert}" action="#{penaltyBean.saveToDatabase(penalty)}"
+                                     onclick="submit()"
+                                     rendered="#{penalty.keyModify}"/>
+                </p:column>            
+            </p:dataTable>
+            <h:commandButton value="#{msgs.save}" action="#{penaltyBean.saveFromUpdate()}"/> &nbsp;
+            <h:commandButton value="#{msgs.addrow}" action="#{penaltyBean.insertPenalty()}" 
+                             /> &nbsp;
+            <p:commandButton  title="#{msgs.deletepenalty}"
+                                      value="#{msgs.deletepenalty}" styleClass="ui-button-raised ui-button-danger" 
+                                      icon="pi pi-trash"
+                                      rendered="#{!penalty.keyModify}"
+                                      onclick="PF('asdv-dlg-deletepe').show();">
+                    </p:commandButton  >
+                    <p:dialog header="#{msgs.deletepenalty}" 
+                      widgetVar="asdv-dlg-deletepe" modal="true">
+                        <h:outputText value="#{msgs.penaltyp}"/>
+                <br/>
+                <br/>
+                <p:commandButton value="#{msgs.ok}" icon="pi pi-check" 
+                                 update="@form:globalgrowl"
+                                 onclick="PF('dlg').hide(); submit();" 
+                                 action="#{penaltyBean.deletePenalty()}">
+                </p:commandButton >
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <p:commandButton value="#{msgs.cancel}"  
+                                 styleClass="ui-button-raised ui-button-warning" 
+                                 update="@none"
+                                 partialSubmit = "true"
+                                 onclick="PF('dlg').hide();"/>
+            </p:dialog>
+            <br/><br/>
+            <p:dataTable  id="id_committee_table"
+                          var="member"
+                          value="#{committeeBean.getMembers()}"
+                          scrollable="true"
+                          paginatorAlwaysVisible="true"
+                          paginator="true"
+                          paginatorPosition="top"
+                          rows="4">
+                <f:facet name="header"> <h:outputText value="#{msgs.committee}" style="font-size: 1.2em"/></f:facet>                
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.update}" /></f:facet>                
+                    <h:selectBooleanCheckbox  onclick="submit()"
+                                              value="#{member.modify}">
+                    </h:selectBooleanCheckbox >
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.playerno}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!member.keyModify}" value="#{member.playerno}"
+                                 title="#{msgs.playerno}">
+                        <f:validateLength minimum="1" maximum="3"/>
+                    </p:inputText>
+                </p:column>
+
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.begindate}" /></f:facet>                
+
+                    <p:calendar disabled ="#{!member.keyModify}" value="#{member.bdate}"
+                                title="#{msgs.paymentdate}"
+                                pattern="yyyy-MM-dd">
+                    </p:calendar>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.enddate}" /></f:facet>                
+
+                    <p:calendar disabled ="#{!member.modify}" value="#{member.edate}"
+                                title="#{msgs.paymentdate}"
+                                pattern="yyyy-MM-dd">
+                    </p:calendar>
+                </p:column>
+                <p:column> 
+                    <f:facet name="header"> <h:outputText value="#{msgs.position}" /></f:facet>                
+
+                    <p:inputText disabled ="#{!member.modify}" value="#{member.position}"
+                                 title="#{msgs.amount}">
+                    </p:inputText>
+                </p:column>
+                <p:column> 
+                    <h:commandButton value="#{msgs.insert}" action="#{committeeBean.saveToDatabase(member)}"
+                                     onclick="submit()"
+                                     rendered="#{member.keyModify}"/>
+                </p:column>            
+            </p:dataTable>
+            <h:commandButton value="#{msgs.save}" action="#{committeeBean.saveFromUpdate()}"/> &nbsp;
+            <h:commandButton value="#{msgs.addrow}" action="#{committeeBean.insertMember()}" 
+                             /> &nbsp;
+            <p:commandButton  title="#{msgs.deletemember}"
+                                      value="#{msgs.deletemember}" styleClass="ui-button-raised ui-button-danger" 
+                                      icon="pi pi-trash"
+                                      rendered="#{!member.keyModify}"
+                                      onclick="PF('asdv-dlg-deletec').show();">
+                    </p:commandButton  >
+                    <p:dialog header="#{msgs.deletemember}" 
+                      widgetVar="asdv-dlg-deletec" modal="true">
+                        <h:outputText value="#{msgs.memberp}?"/>
+                <br/>
+                <br/>
+                <p:commandButton value="#{msgs.ok}" icon="pi pi-check" 
+                                 update="@form:globalgrowl"
+                                 onclick="PF('dlg').hide(); submit();" 
+                                 action="#{committeeBean.deleteMember()}">
+                </p:commandButton >
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <p:commandButton value="#{msgs.cancel}"  
+                                 styleClass="ui-button-raised ui-button-warning" 
+                                 update="@none"
+                                 partialSubmit = "true"
+                                 onclick="PF('dlg').hide();"/>
+            </p:dialog>
+
+
+        </h:form>
+    </h:body>
+</html>
